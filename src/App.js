@@ -44,7 +44,19 @@ class App extends React.Component
   //this. setState() triggers the render() method, so that we can
   updateItem (key,value)
   {
-    this.setState({[key]:value});
+    this.setState({[key]:value}); //this referes to instance of object from class
+  }
+
+  removeToDo (id)
+  {
+    const currentToDoList =[...this.state.toDos]; ///... spread operater breaks up each value of array in comma separated values.
+
+    //Returns a filtered version of the array, leaving only the items that didn't match the id parameter.
+    const updatedToDoList = currentToDoList.filter( toDo => toDo.uniqueId!==id);
+    //We will have an array without the target!
+
+    //Since we cn't update directly..use the setState method! This will trigger the render() method.
+    this.setState(  {toDos: updatedToDoList});
   }
   render()
   {
@@ -63,8 +75,13 @@ class App extends React.Component
         <input type="submit" value="Add New To-Do"/>
       </form>
       <h2>Current To-Dos:</h2>
-      <ul>
-        <ToDo />
+      <ul>         
+        {this.state.toDos.map(toDo =>( //we can use .map to loop through our array contents. 
+          <li key={toDo.uniqueId} onClick={()=> {this.removeToDo(toDo.uniqueId)}
+        } >
+        {toDo.value}
+        </li>
+        ) )}
       </ul>
       </>
     );

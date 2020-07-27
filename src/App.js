@@ -1,5 +1,6 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import ToDo from './ToDo.js';
 
 
 class App extends React.Component
@@ -62,7 +63,9 @@ class App extends React.Component
         <input type="submit" value="Add New To-Do"/>
       </form>
       <h2>Current To-Dos:</h2>
-      <ul></ul>
+      <ul>
+        <ToDo />
+      </ul>
       </>
     );
 
